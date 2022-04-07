@@ -1,0 +1,6 @@
+Todo: add unit tests for flask application
+Todo: create manifest files for controller
+    Todo: create Deployment config
+    Todo: create service and route
+    Todo: create RBAC
+    Todo: create kustomize file

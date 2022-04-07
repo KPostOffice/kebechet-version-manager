@@ -1,0 +1,9 @@
+apiVersion: tekton.dev/v1beta1 # TODO
+kind: Pipeline
+metadata:
+  name: version-update-pr
+  labels:
+    kubernetes.io/created-by: kebechet-version-manager
+spec:
+  taskRef:
+    name:
