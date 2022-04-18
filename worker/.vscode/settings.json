@@ -1,0 +1,8 @@
+{
+    "workbench.colorCustomizations": {
+        "activityBar.background": "#1A168C",
+        "titleBar.activeBackground": "#241EC4",
+        "titleBar.activeForeground": "#FAFAFE"
+    },
+    "python.pythonPath": "/home/kpostlet/.local/share/virtualenvs/worker-CUrHeOgR/bin/python"
+}

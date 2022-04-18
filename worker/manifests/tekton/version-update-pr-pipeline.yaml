@@ -1,3 +1,9 @@
+# inputs:
+#   project url: str
+
+# TODO: clone depth is full depth
+# TODO: clone to subdir of output directory
+
 apiVersion: tekton.dev/v1beta1 # TODO
 kind: Pipeline
 metadata:
@@ -5,5 +11,12 @@ metadata:
   labels:
     kubernetes.io/created-by: kebechet-version-manager
 spec:
-  taskRef:
-    name:
+  workspaces:
+    name: pipeline-ws
+  tasks:
+    - name: clone-repo
+      taskRef:
+        name: git-clone
+      workspaces:
+        - name: output
+          workspace: pipeline-ws

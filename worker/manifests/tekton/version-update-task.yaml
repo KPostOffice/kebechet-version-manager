@@ -5,5 +5,7 @@ metadata:
   labels:
     kubernetes.io/created-by: kebechet-version-manager
 spec:
+  workspaces:
+    name
   steps:
     - name

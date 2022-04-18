@@ -1,0 +1,13 @@
+# This file should appear in the .github directory of your project, or .github dir of the .github repo for global org
+# configuration. Any values provided in a project specific configuration will override those present in the .github
+# repository.
+
+# files-with-version: [VERSION]  # places which contain a version which needs to be updated (defaults to just VERSION)
+# label-config:  # map labels to release types for PRs
+#   patch: 'release/patch'
+#   minor: 'release/minor'
+#   major: 'release/major'
+#   pre: 'release/pre'
+#   build: 'release/build'
+#   finalize: 'release/finalize'
+#   calendar: 'release/calendar'

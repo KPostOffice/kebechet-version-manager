@@ -4,3 +4,5 @@ Todo: create manifest files for controller
     Todo: create service and route
     Todo: create RBAC
     Todo: create kustomize file
+Todo: create config map for app config
+    Todo: use .github repository as a base and then repository config overrides values in default
