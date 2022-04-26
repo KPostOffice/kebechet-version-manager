@@ -54,7 +54,7 @@ def update_config_file_on_change():
                 os.path.join(app.config['REPOSITORY_CONFIG_DIR'], repo_owner, repo_name, ".thoth.yaml"), "w"
             ) as f:
                 f.write(repository.file_contents(".thoth.yaml").decoded.decode('utf-8'))
-        if ".github/kebechet-advise-manager" in commit["modified"]
+        if ".github/kebechet-advise-manager" in commit["modified"]:
             with open(
                 os.path.join(app.config['REPOSITORY_CONFIG_DIR'], repo_owner, repo_name, "app_config"), "w"
             ) as f:
@@ -63,13 +63,13 @@ def update_config_file_on_change():
 
 @github_app.on("issue.opened")
 def create_new_version_pr():
+    # TODO: check if issue opener has permission
     # TODO: schedule worker open_version_update_pr(repository, update_type, issue_id)
     pass
 
 @github_app.on("push")
 def process_push_webhook():
     update_config_file_on_change()  # should happen first so config is always latest before acting
-    advise_on_pipfile_change()
 
 
 # TODO: create the .github repo if it doesn't exist

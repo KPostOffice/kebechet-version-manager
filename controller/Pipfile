@@ -4,10 +4,11 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-click = "*"
-gitpython = "*"
+flask-githubapp = "*"
+"github3.py" = "*"
+kubernetes = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.7"
+python_version = "3.6"

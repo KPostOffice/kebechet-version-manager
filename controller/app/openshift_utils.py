@@ -20,7 +20,7 @@ if IN_CLUSTER:
     with open("/var/run/secrets/kubernetes.io/serviceaccount/namespace", "r") as f:
         NAMESPACE = f.read()
 else:
-    NAMESPACE = config.list_kube_config_contexts()[1].split("/")[0]
+    NAMESPACE = config.list_kube_config_contexts()[1]['context']['namespace']
 
 def _create_expiration_timestamp() -> str:
     expiration = datetime.utcnow() + datetime.hour - datetime.second * 60  # subtract 60 seconds for potential clock drift
@@ -35,7 +35,6 @@ def create_github_token_secret(installation_id: str, token: str, gh_namespace: s
     )
     secret = client.V1Secret(
         api_version="v1",
-        type="Secret",
         data={"token": token, "gh_namespace": gh_namespace},
         type="Opaque",
         metadata=meta,
@@ -45,7 +44,7 @@ def create_github_token_secret(installation_id: str, token: str, gh_namespace: s
 def update_github_token_secret(installation_id: str, token: str):
     body = [
         {'op': 'replace', 'path': '/data/token', 'value': token},
-        {'op': 'replace', 'path': '/metadata/annotations/expiration', _create_expiration_timestamp()}
+        {'op': 'replace', 'path': '/metadata/annotations/expiration', 'value': _create_expiration_timestamp()},
     ]  # use json patch to alter values
     v1.patch_namespaced_secret(
         name=secret_name.format(installation_id=installation_id), namespace=NAMESPACE, body=body
