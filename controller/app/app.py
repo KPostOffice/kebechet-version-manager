@@ -8,8 +8,7 @@ from . import openshift_utils
 app = Flask(__name__)
 
 app.config['GITHUBAPP_ID'] = int(os.environ['GITHUBAPP_ID'])
-with open(os.environ['GITHUBAPP_KEY_PATH'], 'rb') as key_file:
-    app.config['GITHUBAPP_KEY'] = key_file.read()
+app.config['GITHUBAPP_KEY'] = os.environ['GITHUBAPP_KEY']
 app.config['GITHUBAPP_SECRET'] = os.environ['GITHUBAPP_SECRET']
 app.config['GITHUBAPP_ROUTE'] = '/github/'  # allows for extension to other git forges
 

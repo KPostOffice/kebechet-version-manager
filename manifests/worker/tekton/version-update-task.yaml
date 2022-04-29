@@ -1,0 +1,28 @@
+apiVersion: tekton.dev/v1beta1 # TODO
+kind: Task
+metadata:
+  name: version-update-pr
+  labels:
+    kubernetes.io/created-by: kebechet-version-manager
+spec:
+  inputs:
+    params:
+      - name: repo-namespace
+      - name: repo-name
+      - name: release-type
+      - name: repo-location
+      - name: trigger-id
+      - name: yaml-config
+  steps:
+    - name: version-update-pr
+      image: version-manager-worker
+      command: [python cli.py update-version]
+      env:
+        - name: KEBECHET_REPO_NAMESPACE
+        - name: KEBECHET_REPO_NAME
+        - name: KEBECHET_RELEASE_TYPE
+        - name: KEBECHET_REPO_LOCATION
+          value: # TODO: from mount location
+        - name: KEBECHET_TRIGGER_ID
+        - name: KEBECHET_COMMIT_HASH
+        - name: KEBECHET_YAML_CONFIG

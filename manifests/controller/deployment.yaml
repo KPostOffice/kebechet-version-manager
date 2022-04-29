@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: keb-version-manager-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: version-manager-controller
+  template:
+    metadata:
+      labels:
+        app: version-manager-controller
+    spec:
+      containers:
+      - name: version-manager-controller
+        image: version-manager-controller
+        volumeMounts:
+        - name: config-cache
+          mountPath: /etc/repo_config
+        envFrom:
+        - secretRef:
+            name: version-manager-app-secrets
+        env:
+        - name: REPOSITORY_CONFIG_DIR
+          value: /etc/repo_config
+        ports:
+        - containerPort: 5000
+      volumes:
+      - name: config-cache
+        emptyDir: {}

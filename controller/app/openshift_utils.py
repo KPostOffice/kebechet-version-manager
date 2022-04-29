@@ -5,9 +5,11 @@ IN_CLUSTER = False
 
 # Wrap the 'load_incluster' function so that when `config.load_client()` is
 # called we know whether or not we are in cluster
+temp_func = config.load_incluster_config
 def _load_incluster_config(**kwargs):
+    global IN_CLUSTER
     IN_CLUSTER = True
-    config.load_incluster_config(**kwargs)
+    temp_func(**kwargs)
 config.load_incluster_config = _load_incluster_config
 
 config.load_config()  # if we are in cluster, in_cluster = True

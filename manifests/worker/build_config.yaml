@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: BuildConfig
+metadata:
+  labels:
+    app: version-manager
+  name: version-manager-worker-test
+spec:
+  output:
+    to:
+      kind: ImageStreamTag
+      name: version-manager-worker:test
+  runPolicy: Serial
+  source:
+    git:
+      uri: https://github.com/kpostoffice/kebechet-version-manager
+      ref: master
+    type: Git
+  strategy:
+    type: Docker
+    dockerStrategy:
+      dockerfilePath: Worker.dockerfile

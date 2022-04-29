@@ -92,9 +92,7 @@ def update_version(repo_namespace, repo_name, release_type, repo_location, trigg
         prev_release = None
         new_release = "0.0.0"
     else:
-        prev_release = repo.git.describe('--abbrev=0', '--tags')  # git latest tag available
-        if prev_release.startswith('v'):
-            prev_release = prev_release[1:]
+        prev_release = repo.git.tag('--list', '--sort=-version:refname', 'v*').splitlines()[0]  # git latest vers. tag
         try:
             new_release = VERSION_UPDATE_DISPATCH[release_type](prev_release)
         except ValueError as exc:
@@ -122,7 +120,6 @@ def update_version(repo_namespace, repo_name, release_type, repo_location, trigg
         base=github_repo.default_branch,
         head=branch_name,
     )
-    # TODO: update version and add commits to changelog
 
 if __name__ == '__main__':
     cli(auto_envvar_prefix='KEBECHET')

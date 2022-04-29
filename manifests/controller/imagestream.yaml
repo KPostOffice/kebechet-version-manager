@@ -1,0 +1,15 @@
+apiVersion: image.openshift.io/v1
+kind: ImageStream
+metadata:
+  name: version-manager-controller
+spec:
+  lookupPolicy:
+    local: true
+  tags:
+  - from:
+      kind: DockerImage
+      name: quay.io/kpostlet/keb-version-manager-controller:v0.0.1
+    importPolicy: {}
+    name: latest
+    referencePolicy:
+      type: Local
