@@ -8,7 +8,7 @@ spec:
   tags:
   - from:
       kind: DockerImage
-      name: quay.io/kpostlet/keb-version-manager-worker:v0.0.1
+      name: quay.io/kpostlet/keb-version-manager-worker:v0.0.0
     importPolicy: {}
     name: latest
     referencePolicy:
