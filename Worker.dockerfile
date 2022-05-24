@@ -20,16 +20,13 @@ FROM base AS runtime
 
 USER 0
 
-RUN mkdir -p /opt/app-root/src/worker/common
-
-# copy venv created by python-deps build container
-COPY --from=python-deps /opt/app-root/src/.venv /opt/app-root/src/.venv
-
 COPY ./worker/cli /opt/app-root/src/worker
-
 # Remove symbolic link used for local dev and replace it with actual content
 RUN rm /opt/app-root/src/worker/common
 COPY ./common /opt/app-root/src/worker/common
+
+# copy venv created by python-deps build container
+COPY --from=python-deps /opt/app-root/src/.venv /opt/app-root/src/.venv
 
 WORKDIR /opt/app-root/src/worker
 

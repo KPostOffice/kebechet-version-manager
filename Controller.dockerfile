@@ -20,15 +20,12 @@ FROM base AS runtime
 
 USER 0
 
-RUN mkdir -p /opt/app-root/src/controller/common
-
-COPY --from=python-deps /opt/app-root/src/.venv /opt/app-root/src/.venv
-
 COPY ./controller/app /opt/app-root/src/controller
-
 # Remove symbolic link used for local dev and replace it with actual content
 RUN rm /opt/app-root/src/controller/common
 COPY ./common /opt/app-root/src/controller/common
+
+COPY --from=python-deps /opt/app-root/src/.venv /opt/app-root/src/.venv
 
 WORKDIR /opt/app-root/src/controller
 
